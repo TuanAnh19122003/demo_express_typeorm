@@ -3,9 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>User</title>
 </head>
 <body>
-    <h1>Home</h1>
+    <h1>Users List</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>first Name</th>
+                <th>last Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% users.forEach(item =>{ %>
+                <tr>
+                    <td><%= item.id %></td>
+                    <td><%= item.firstName %></td>
+                    <td><%= item.lastName %></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
 </body>
 </html>
