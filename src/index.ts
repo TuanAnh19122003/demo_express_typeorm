@@ -1,7 +1,8 @@
-import express, { Express, Request, Response } from "express";
+import express, { Express, Request, Response, Router } from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
-import "reflect-metadata"
+import "reflect-metadata";
+import router from "@routers/web.router";
 import { AppDataSource } from "@databases/data-source";
 
 dotenv.config();
@@ -17,12 +18,13 @@ app.set('view engine', 'ejs');
 app.set('views', './src/views');
 
 AppDataSource.initialize().then(() => {
-  console.log('Connected to DB')
+  console.log('Database connected and initialized');
 }).catch((err) => {
   console.error('Error while connecting to the database: ', err.message);
   process.exit(1);
 });
 
+app.use(router)
 
 app.get("/", (req: Request, res: Response) => {
   res.render('index')
