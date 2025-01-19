@@ -2,7 +2,8 @@ import express, { Express, Request, Response, Router } from "express";
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import "reflect-metadata";
-import router from "@routers/web.router";
+import webrouter from "@routers/web.router";
+import apirouter from "@routers/api.router";
 import { AppDataSource } from "@databases/data-source";
 
 dotenv.config();
@@ -24,7 +25,8 @@ AppDataSource.initialize().then(() => {
   process.exit(1);
 });
 
-app.use(router)
+app.use("/", webrouter)
+app.use("/api",apirouter)
 
 app.get("/", (req: Request, res: Response) => {
   res.render('index')
