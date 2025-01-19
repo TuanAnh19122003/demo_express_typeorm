@@ -16,7 +16,7 @@ class UserService{
         u1.isActive = isActive;
         return await userRepository.save(u1);
     }
-    static async updateUser(id: number, data: any, method: string): Promise<User>{
+    static async editUser(id: number, data: any, method: string): Promise<User>{
         const { firstName, lastName, isActive } = data; 
         const user = await userRepository.findOne({where: {id}});
 
@@ -40,6 +40,13 @@ class UserService{
         }
 
         return await userRepository.save(user);
+    }
+    static async getUserById(id: number){
+        const user = await userRepository.findOne({where: {id}});
+        if(!user){
+            throw new Error("User not found");
+        }
+        return user;
     }
 
     static async deleteUser(id: number): Promise<void>{

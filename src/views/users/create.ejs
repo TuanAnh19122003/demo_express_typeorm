@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('../layouts/head.ejs', { pageTitle:'Thêm người dùng' }) %>
+<body>
+    <div class="container mb-5">
+        <%- include('../layouts/navbar.ejs') %>
+        
+        <div class="card mt-4">
+            <div class="card-header d-flex align-items-center justify-content-between">
+                <h1 class="mb-0">Create Form</h1>
+                <a class="btn btn-secondary" onclick="window.history.back();">
+                    <i class="fa fa-arrow-left"></i> Back
+                </a>
+            </div>
+            
+            <div class="card-body">
+                <form action="/api/users/create" method="post">
+                    <div class="mb-3">
+                        <label for="firstName" class="form-label">First Name:</label>
+                        <input type="text" class="form-control" id="firstName" name="firstName" placeholder="First Name" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="lastName" class="form-label">Last Name:</label>
+                        <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Last Name" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="isActive" class="form-label">Status:</label>
+                        <input type="number" class="form-control" id="isActive" name="isActive" placeholder="Status" required>
+                    </div>
+
+                    <div class="text-end">
+                        <button type="submit" class="btn btn-success">Create</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
