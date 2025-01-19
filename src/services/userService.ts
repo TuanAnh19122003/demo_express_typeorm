@@ -19,6 +19,7 @@ class UserService{
     static async editUser(id: number, data: any, method: string): Promise<User>{
         const { firstName, lastName, isActive } = data; 
         const user = await userRepository.findOne({where: {id}});
+        const status = isActive === 'on' || isActive === true; 
 
         if(!user){
             throw new Error("User not found");
@@ -30,12 +31,12 @@ class UserService{
             }
             user.firstName = firstName || user.firstName;
             user.lastName = lastName || user.lastName;
-            user.isActive = isActive || user.isActive;
+            user.isActive = status || user.isActive;
             return await userRepository.save(user);
-        } else if(method === "PATCH"){
+        } else if(method === "PATCH" || method === "POST"){
             user.firstName = firstName ?? user.firstName;
             user.lastName = lastName ?? user.lastName;
-            user.isActive = isActive ?? user.isActive;
+            user.isActive = status ?? user.isActive;
             return await userRepository.save(user);
         }
 

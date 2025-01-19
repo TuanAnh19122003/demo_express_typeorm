@@ -22,6 +22,9 @@ router.put('/users/:id/edit', (req: Request, res: Response) => {
 router.patch('/users/:id/edit', (req: Request, res: Response) => {
     UserAPIController.editUser(req, res);
 });
+router.post('/users/:id/edit', (req: Request, res: Response) => {
+    UserAPIController.editUser(req, res);
+});
 
 router.get('/users/:id/delete', (req: Request, res: Response) => {
     UserAPIController.deleteUser(req, res);

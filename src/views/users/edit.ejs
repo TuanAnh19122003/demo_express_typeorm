@@ -14,8 +14,7 @@
             </div>
             
             <div class="card-body">
-                <form action="/api/users/<%= user.id %>/edit" method="PUT">
-                    <input type="hidden" name="_method" value="PUT">
+                <form action="/api/users/<%= user.id %>/edit" method="post">
                     <div class="mb-3">
                         <label for="firstName" class="form-label">First Name:</label>
                         <input type="text" class="form-control" id="firstName" name="firstName" value="<%= user.firstName %>" required>
