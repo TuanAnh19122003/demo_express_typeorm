@@ -33,7 +33,7 @@ class UserService{
             user.lastName = lastName || user.lastName;
             user.isActive = status || user.isActive;
             return await userRepository.save(user);
-        } else if(method === "PATCH" || method === "POST"){
+        } else if(method === "PATCH"){
             user.firstName = firstName ?? user.firstName;
             user.lastName = lastName ?? user.lastName;
             user.isActive = status ?? user.isActive;
