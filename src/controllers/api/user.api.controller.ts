@@ -10,10 +10,10 @@ class UserAPIController {
                 "cod":200,
                 "data":users
             }
-            // res.json(data);
-            res.render('users/list', {
-                users: users,
-            });            
+            res.json(data);
+            // res.render('users/list', {
+            //     users: users,
+            // });            
         } catch (error) {
             const data = {
                 "cod":500,
@@ -37,8 +37,8 @@ class UserAPIController {
                 "message":"User created",
                 "data":user
             }
-            // res.json(data);
-            res.redirect('/api/users');
+            res.json(data);
+            // res.redirect('/api/users');
         } catch (error) {
             const data = {
                 "cod":500,
@@ -68,8 +68,8 @@ class UserAPIController {
                 "message":"User updated",
                 "data":user
             }
-            // res.json(data);
-            res.redirect('/api/users');
+            res.json(data);
+            // res.redirect('/api/users');
         } catch (error) {
             const data = {
                 "cod":500,
@@ -87,8 +87,8 @@ class UserAPIController {
                 "cod":200,
                 "message":"User deleted"
             }
-            // res.json(data);
-            res.redirect('/api/users');
+            res.json(data);
+            //res.redirect('/api/users');
         } catch (error) {
             const data = {
                 "cod":500,
