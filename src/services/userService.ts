@@ -9,11 +9,13 @@ class UserService{
         return data;
     }
     static async createUser(data: any){
-        const { firstName, lastName, isActive } = data;
+        const { firstName, lastName, email, password, isActive } = data;
         const u1 : User = new User();
         u1.firstName = firstName;
         u1.lastName = lastName;
-        u1.isActive = isActive;
+        u1.isActive = isActive ? isActive: false;
+        u1.email = email;
+        u1.password = password;
         return await userRepository.save(u1);
     }
     static async editUser(id: number, data: any, method: string): Promise<User>{
@@ -56,6 +58,16 @@ class UserService{
             throw new Error("User not found");
         }
         await userRepository.remove(user);
+    }
+
+    static async getAccountByEmail(data: any): Promise<any>{
+        const { email, password } = data;
+        return await userRepository.findOne({
+            where: { 
+                email: email, 
+                password: password 
+            }
+        })
     }
 }
 

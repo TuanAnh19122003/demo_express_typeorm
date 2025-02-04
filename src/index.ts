@@ -2,6 +2,9 @@ import express, { NextFunction, Express, Request, Response, Router } from "expre
 import dotenv from "dotenv";
 import bodyParser from "body-parser";
 import "reflect-metadata";
+import cookieParser from "cookie-parser";
+import session from "express-session";
+
 import webrouter from "@routers/web.router";
 import apirouter from "@routers/api.router";
 import { AppDataSource } from "@databases/data-source";
@@ -16,6 +19,13 @@ const port = process.env.PORT || 3000;
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
+app.use(cookieParser())
+app.use(session({
+  secret: 'mykey',
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: true }, // Set secure to true in production environment to enable HTTPS
+}))
 
 app.set('view engine', 'ejs');
 app.set('views', './src/views');
