@@ -24,8 +24,12 @@ app.use(session({
   secret: 'mykey',
   resave: false,
   saveUninitialized: true,
-  cookie: { secure: true }, // Set secure to true in production environment to enable HTTPS
 }))
+
+app.use((req, res, next)=>{
+  res.locals.session = req.session;
+  next();
+})
 
 app.set('view engine', 'ejs');
 app.set('views', './src/views');
@@ -38,7 +42,7 @@ AppDataSource.initialize().then(() => {
   process.exit(1);
 });
 
-app.use(blockIP)
+// app.use(blockIP)
 app.use("/", webrouter)
 app.use("/api", checkAPPkey, apirouter)
 

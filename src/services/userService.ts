@@ -1,6 +1,8 @@
 import User from "@entity/User";
+import Role from "@entity/Role";
 import { AppDataSource } from "@databases/data-source";
 const userRepository = AppDataSource.getRepository(User)
+const roleRepository = AppDataSource.getRepository(Role)
 
 class UserService{
     static async getAllUsers(): Promise<User[]>{
@@ -16,6 +18,12 @@ class UserService{
         u1.isActive = isActive ? isActive: false;
         u1.email = email;
         u1.password = password;
+        const role = await roleRepository.findOne({
+            where:{id: 2}
+        });
+        if(role){
+            u1.role = role;
+        }
         return await userRepository.save(u1);
     }
     static async editUser(id: number, data: any, method: string): Promise<User>{
@@ -66,7 +74,8 @@ class UserService{
             where: { 
                 email: email, 
                 password: password 
-            }
+            },
+            relations:["role"],
         })
     }
 }

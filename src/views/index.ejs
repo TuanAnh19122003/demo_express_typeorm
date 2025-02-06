@@ -10,5 +10,11 @@
         Home
     </h1>
     <a href="/logout">Logout</a>
+    <h2>
+        Xin chào: <%= session.userLogin.firstName + " " + session.userLogin.lastName %>
+    </h2>
+    <% if(session.userLogin.role.id == 1){ %>
+        <a href="/weather">Weather</a>
+    <% } %>
 </body>
 </html>

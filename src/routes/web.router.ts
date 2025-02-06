@@ -2,6 +2,7 @@ import express, { Express, Request,Response, Router } from "express";
 import UserController from "@controllers/userController";
 import WeatherController from "@controllers/weatherController";
 import { checkAuth } from "src/middlewares/checkAuth";
+import { isAdmin } from "src/middlewares/isAdimn.midd";
 
 const router: Router = express.Router();
 
@@ -11,7 +12,7 @@ router.get('/users', checkAuth, (req: Request, res: Response) => {
 router.get('/home', (req: Request, res: Response) => {
     res.render('index');
 });
-router.get('/weather', (req: Request, res: Response) => {
+router.get('/weather', checkAuth, isAdmin, (req: Request, res: Response) => {
     WeatherController.index(req, res)
 });
 router.get('/register', (req: Request, res: Response) => {

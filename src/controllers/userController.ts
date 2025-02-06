@@ -32,6 +32,7 @@ class UserController{
     
     static async login(req: any, res: Response) {
         const user: any = await UserService.getAccountByEmail(req.body)
+        console.log(user);
         if (user) {
             // luu lai session login
             req.session.regenerate(function (err: any) {
@@ -42,10 +43,11 @@ class UserController{
             
                 // store user information in session, typically a user id
                 req.session.userIdLogin = user.id;
-                console.log(user.id)
+                req.session.userLogin = user;
+                
                 req.session.save(function (err: any) {
-                  if (err) return;
-                  res.redirect('/home')
+                    if (err) return;
+                    res.redirect('/home')
                 })
             })
         } else {
